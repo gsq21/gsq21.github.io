@@ -266,6 +266,24 @@
                     ".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"
                 ), n(), r()
         }(window, document);
+
+        //流星雨
+        // 获取当前设备屏幕的宽度
+        var screenWidth = window.innerWidth;
+
+        // 获取所有的 .star 元素
+        var stars = document.querySelectorAll('.star');
+
+        // 遍历每个 .star 元素
+        stars.forEach(function (star) {
+            // 获取当前 .star 元素的 `left` 样式值
+            var left = parseInt(star.style.left, 10);
+
+            // 如果 `left` 大于屏幕宽度，隐藏该元素
+            if (left > screenWidth) {
+                star.style.display = 'none';
+            }
+        });
     </script>
 
 </body>

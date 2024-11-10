@@ -577,6 +577,7 @@
         /* 内边距 */
         padding: 20px;
         pointer-events: none;
+        /* overflow: hidden; */
     }
 
     .index-bg .stars {
