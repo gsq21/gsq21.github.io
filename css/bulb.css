@@ -1,0 +1,308 @@
+    /* 定义每个灯容器占 1.7 列 */
+    .row {
+        display: flex;
+        position: fixed;
+        /* 固定定位 */
+        top: 0;
+        /* 固定在页面顶部 */
+        left: 0;
+        /* 保持在页面左侧 */
+        width: 100%;
+        /* 宽度占满整个视口 */
+        z-index: 9999;
+        /* 确保它在其他元素上方 */
+    }
+
+    .col {
+        flex: 0 0 14.17%;
+        /* 1.7 * 8.33% */
+        max-width: 14.17%;
+        /* 确保每个灯泡的盒子宽度不超过 14.17% */
+    }
+
+    /* 如果需要去除列间距，可以使用以下样式 */
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+
+    .peach-after {
+        background-image: url('../images/background.png');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        /* 保持背景固定 */
+    }
+
+    @media (max-width: 3434px) {
+        .peach-after {
+            background-image: url('../images/background-mobile.png');
+        }
+
+    }
+
+    .bulb {
+        width: 50px;
+        height: 50px;
+        margin: auto;
+        background-repeat: no-repeat no-repeat;
+        background-position: center 0px;
+        background-size: 50px 50px;
+    }
+
+    .bulb-holder {
+        height: 70px;
+    }
+
+    .bulb-glow-yellow-after {
+        background-image: url('../images/bulb_yellow.png');
+        animation: bulb_glow_yellow_after linear 1s infinite;
+    }
+
+    @keyframes bulb_glow_yellow_after {
+        0% {
+            background-image: url('../images/bulb.png');
+        }
+
+        50% {
+            background-image: url('../images/bulb_yellow.png');
+        }
+
+        100% {
+            background-image: url('../images/bulb.png');
+        }
+    }
+
+    /* 灯光效果 */
+    .light {
+        width: 60%;
+        height: 60%;
+        border-radius: 50%;
+        position: relative;
+        top: 50%;
+        margin: auto;
+        transform: translateY(-20%);
+    }
+
+    /* 黄光 */
+    .yellow-light {
+        animation: yellowLight linear 1s infinite;
+    }
+
+    @keyframes yellowLight {
+        0% {}
+
+        50% {
+            box-shadow:
+                0 0 90px rgba(255, 255, 0, 0.8),
+                /* 黄色光芒的浅发光效果 */
+                0 0 120px rgba(255, 255, 0, 0.6),
+                /* 黄色光芒的中等发光效果 */
+                0 0 140px rgba(255, 255, 0, 0.5);
+            /* 黄色光芒的强烈发光效果 */
+        }
+
+        100% {}
+    }
+
+    .bulb-glow-red-after {
+        background-image: url('../images/bulb_red.png');
+        animation: bulb_glow_red_after linear 1.2s infinite;
+    }
+
+    @keyframes bulb_glow_red_after {
+        0% {
+            background-image: url('../images/bulb.png');
+        }
+
+        50% {
+            background-image: url('../images/bulb_red.png');
+        }
+
+        100% {
+            background-image: url('../images/bulb.png');
+        }
+    }
+
+    /* 红光 */
+    .red-light {
+        animation: redLight linear 1.2s infinite;
+    }
+
+    @keyframes redLight {
+        0% {}
+
+        50% {
+            box-shadow:
+                0 0 90px rgba(255, 0, 0, 1),
+                /* 红色光芒的浅发光效果 */
+                0 0 120px rgba(255, 0, 0, 0.8),
+                /* 红色光芒的中等发光效果 */
+                0 0 140px rgba(255, 0, 0, 0.5);
+            /* 红色光芒的强烈发光效果 */
+        }
+
+        100% {}
+    }
+
+    .bulb-glow-blue-after {
+        background-image: url('../images/bulb_blue.png');
+        animation: bulb_glow_blue_after linear 1.4s infinite;
+    }
+
+    @keyframes bulb_glow_blue_after {
+        0% {
+            background-image: url('../images/bulb.png');
+        }
+
+        50% {
+            background-image: url('../images/bulb_blue.png');
+        }
+
+        100% {
+            background-image: url('../images/bulb.png');
+        }
+    }
+
+    /* 蓝光 */
+    .blue-light {
+        animation: blueLight linear 1.4s infinite;
+    }
+
+    @keyframes blueLight {
+        0% {}
+
+        50% {
+            box-shadow:
+                0 0 90px rgb(3, 201, 236, 0.8),
+                /* 蓝色光芒的浅发光效果 */
+                0 0 120px rgba(3, 201, 236, 0.6),
+                /* 蓝色光芒的中等发光效果 */
+                0 0 140px rgba(3, 201, 236, 0.4);
+            /* 蓝色光芒的强烈发光效果 */
+        }
+
+        100% {}
+    }
+
+    .bulb-glow-green-after {
+        background-image: url('../images/bulb_green.png');
+        animation: bulb_glow_green_after linear 1.8s infinite;
+    }
+
+    @keyframes bulb_glow_green_after {
+        0% {
+            background-image: url('../images/bulb.png');
+        }
+
+        50% {
+            background-image: url('../images/bulb_green.png');
+        }
+
+        100% {
+            background-image: url('../images/bulb.png');
+        }
+    }
+
+    /* 绿光 */
+    .green-light {
+        animation: greenLight linear 1.8s infinite;
+    }
+
+    @keyframes greenLight {
+        0% {}
+
+        50% {
+            box-shadow:
+                0 0 90px rgba(0, 255, 0, 1),
+                /* 绿色光芒的浅发光效果 */
+                0 0 120px rgba(0, 255, 0, 0.8),
+                /* 绿色光芒的中等发光效果 */
+                0 0 140px rgba(0, 255, 0, 0.6);
+            /* 绿色光芒的强烈发光效果 */
+        }
+
+        100% {}
+    }
+
+    .bulb-glow-pink-after {
+        background-image: url('../images/bulb_pink.png');
+        animation: bulb_glow_pink_after linear 2s infinite;
+    }
+
+    @keyframes bulb_glow_pink_after {
+        0% {
+            background-image: url('../images/bulb.png');
+        }
+
+        50% {
+            background-image: url('../images/bulb_pink.png');
+        }
+
+        100% {
+            background-image: url('../images/bulb.png');
+        }
+    }
+
+    /* 粉光 */
+    .pink-light {
+        animation: pinkLight linear 2s infinite;
+    }
+
+    @keyframes pinkLight {
+        0% {}
+
+        50% {
+            box-shadow:
+                0 0 90px rgba(255, 105, 180, 1),
+                /* 粉色光芒的浅发光效果 */
+                0 0 120px rgba(255, 105, 180, 0.8),
+                /* 粉色光芒的中等发光效果 */
+                0 0 140px rgba(255, 105, 180, 0.6);
+            /* 粉色光芒的强烈发光效果 */
+        }
+
+        100% {}
+    }
+
+    .bulb-glow-orange-after {
+        background-image: url('../images/bulb_orange.png');
+        animation: bulb_glow_orange_after linear 2.2s infinite;
+    }
+
+    @keyframes bulb_glow_orange_after {
+        0% {
+            background-image: url('../images/bulb.png');
+        }
+
+        50% {
+            background-image: url('../images/bulb_orange.png');
+        }
+
+        100% {
+            background-image: url('../images/bulb.png');
+        }
+    }
+
+    /* 橙光 */
+    .orange-light {
+        animation: orangeLight linear 2.2s infinite;
+    }
+
+    @keyframes orangeLight {
+        0% {}
+
+        50% {
+            box-shadow:
+                0 0 90px rgba(255, 165, 0, 0.8),
+                /* 橙色光芒的浅发光效果 */
+                0 0 120px rgba(255, 165, 0, 0.6),
+                /* 橙色光芒的中等发光效果 */
+                0 0 140px rgba(255, 165, 0, 0.4);
+            /* 橙色光芒的强烈发光效果 */
+        }
+
+        100% {}
+    }

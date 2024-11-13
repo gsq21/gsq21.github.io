@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title> 琦坨，生日快乐！</title>
+    <link rel="icon" href="./images/favicon.ico">
+    <link href="./css/cake.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bulb.css">
+    <script src="./js/jquery.js"></script>
+    <script src="./js/garden.js"></script>
+    <script src="./js/functions.js"></script>
+    <script src="./js/typed.js"></script>
+</head>
+
+<body class="peach-after">
+    <!-- 顶部灯光 -->
+    <div class="row justify-content-start">
+        <div class="col bulb-holder">
+            <div class="bulb bulb-glow-yellow-after" id="bulb_yellow">
+                <div class="yellow-light light"></div>
+            </div>
+        </div>
+        <div class="col bulb-holder">
+            <div class="bulb bulb-glow-red-after" id="bulb_red">
+                <div class="red-light light"></div>
+            </div>
+        </div>
+        <div class="col bulb-holder">
+            <div class="bulb bulb-glow-blue-after" id="bulb_blue">
+                <div class="blue-light light"></div>
+            </div>
+        </div>
+        <div class="col bulb-holder">
+            <div class="bulb bulb-glow-green-after" id="bulb_green">
+                <div class="green-light light"></div>
+            </div>
+        </div>
+        <div class="col bulb-holder">
+            <div class="bulb bulb-glow-pink-after" id="bulb_pink">
+                <div class="pink-light light"></div>
+            </div>
+        </div>
+        <div class="col bulb-holder">
+            <div class="bulb bulb-glow-orange-after" id="bulb_orange">
+                <div class="orange-light light"></div>
+            </div>
+        </div>
+        <div class="col bulb-holder">
+            <div class="bulb bulb-glow-blue-after" id="bulb_blue">
+                <div class="blue-light light"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 蛋糕绘画盒子 -->
+    <div id="mainDiv">
+        <div id="content">
+            <div id="loveHeart">
+                <canvas id="garden"></canvas>
+                <div id="words">
+                    <div id="messages">
+                        <img src="./images/zsr.png">
+                    </div>
+                    <div id="loveu">
+                        <img src="./images/sr.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 底部文字 -->
+    <div class="birthday-content">
+        <span id="element"></span>
+    </div>
+</body>
+<script type="text/javascript">
+    var offsetX = $("#loveHeart").width() / 2;
+    var offsetY = $("#loveHeart").height() / 2 - 55;
+    var together = new Date();
+    together.setHours(8);
+    together.setMinutes(0);
+    together.setSeconds(0);
+    together.setMilliseconds(0);
+
+    if (!document.createElement('canvas').getContext) {
+        var msg = document.createElement("div");
+        msg.id = "errorMsg";
+        msg.innerHTML = "您的浏览器已经过时!请使用非IE浏览器访问！";
+        document.body.appendChild(msg);
+    } else {
+        setTimeout(function () {
+            startHeartAnimation();
+        }, 1000);
+
+        timeElapse(together);
+        setInterval(function () {
+            timeElapse(together);
+        }, 2000);
+
+        adjustCodePosition();
+    }
+
+    // 设置一秒的定时器
+    setTimeout(function () {
+        // 底部文字位置调整 ，使其始终在蛋糕下方
+        // 获取 mainDiv 元素
+        var mainDiv = document.getElementById('mainDiv');
+
+        // 获取 mainDiv 的位置和尺寸信息
+        var rect = mainDiv.getBoundingClientRect();
+
+        // 计算 mainDiv 底部到页面顶部的距离
+        var distanceFromTop = rect.bottom + window.scrollY;
+
+        var txtContent = document.querySelector('.birthday-content');
+        txtContent.style.top = distanceFromTop + 'px';
+
+        // 底部文字打字效果
+        var typed = new Typed('#element', {
+            strings: ['本来嘞，我是想送你一个生日蛋糕的啦，但是你说你室友他们会给送你蛋糕。所以嘞，我决定送一个特别的蛋糕给你，希望你会喜欢，嘻嘻😊。<br>回想起我们在蛋仔派对中认识的那一刻，就仿佛在昨天一样。虽然咱俩认识的时间说短不短，说不长其实也不长，哈哈哈😆。but，你不仅是我游戏搭子，更是已经成为了我生命中不可或缺的好朋友😉。每次和你一起打蛋仔，你总是能带我飞，太强啦（抱抱大佬大腿🫣）。还有呀，每次和你一起玩游戏，你一些傻乎乎的话语，总是能让人心情愉悦，hhhh🤭<br>生日不仅是一个年轮的结束，更是一个新篇章新征程的开始。祝愿你的人生如这个电子生日蛋糕一样，美丽、丰富、充满爱与欢笑，也愿你今后的每一天都比今天更加精彩💥，每个愿望都能如愿以偿。<br>还有喔，以后不论遇到什么挑战和困难，琦坨你都要记得，朋友们和家人们都会永远支持你（比如我，还是那句话，小事不想帮，大事嘛，帮不了，hhh，开个玩笑。总之一句话，[超认真🤔]有事言语一声，哥一直都在！😎）。好咯，说了这么多，最主要的一句话差点忘了说了，嘿嘿，生日快乐呀!🎉🎉🎉，高思琦学妹（就叫这一次😝），愿你拥有最美好的未来，永远快乐、健康、幸福！💝<br>——2024.11.18 菜菜'
+            ],
+            typeSpeed: 60,
+        });
+    }, 500);
+</script>
+<style>
+
+</style>
+
+</html>

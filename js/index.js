@@ -223,7 +223,6 @@ var ParticlePool = (function () {
 
 var titleElement = document.querySelector('.title');
 titleElement.onclick = function () {
-    console.log('clicked');
     window.location.href = 'main.html';
 }
 //颜色切换

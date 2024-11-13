@@ -185,7 +185,7 @@ const store = {
 				default:
 					throw new Error("version switch should be exhaustive");
 			}
-			console.log(`Loaded config (schema version ${schemaVersion})`);
+			// console.log(`Loaded config (schema version ${schemaVersion})`);
 		}
 		// Deprecated data format. Checked with care (it's not namespaced).
 		else if (localStorage.getItem("schemaVersion") === "1") {

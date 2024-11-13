@@ -4,7 +4,7 @@
 <head>
     <title>高思琦，生日快乐呀！</title>
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="imgs/heart.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/heart.png" type="image/x-icon">
     <style>
         html,
         body {
@@ -37,18 +37,211 @@
             /* 上边距 */
             top: 46%;
             /* 字体 */
-            font-family: "幼圆";
+            font-family: "Microsoft YaHei";
             cursor: pointer;
+        }
+
+        /* 弹幕容器 */
+        .danmu-container {
+            position: absolute;
+            width: 100%;
+            height: 30%;
+            top: 10px;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        /* 弹幕文字样式 */
+        .danmu {
+            position: absolute;
+            white-space: nowrap;
+            font-size: 1.5em;
+            font-family: "Microsoft YaHei", "黑体", "宋体", sans-serif;
+            animation: scroll-left 10s linear forwards;
+        }
+
+        /* 彩蛋弹幕文字样式 */
+        .Interestdanmu {
+            color: gold;
+            text-shadow: 0 0 10px gold, 0 0 20px gold, 0 0 30px #ffcc00, 0 0 40px #ffcc00, 0 0 50px #ffcc00, 0 0 75px #ffcc00;
+            position: absolute;
+            white-space: nowrap;
+            font-size: 1.5em;
+            font-family: "Microsoft YaHei", "黑体", "宋体", sans-serif;
+            animation: scroll-right 8s linear forwards;
+            pointer-events: auto;
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+        @media(min-width: 1160px) {
+            .danmu {
+                font-size: 1.8em;
+                animation: scroll-left 15s linear forwards;
+            }
+
+            .Interestdanmu {
+                font-size: 1.8em;
+                animation: scroll-right 13s linear forwards;
+            }
+        }
+
+        /* 普通弹幕动画效果 */
+        @keyframes scroll-left {
+            from {
+                left: 100%;
+            }
+
+            to {
+                left: -100%;
+            }
+        }
+
+        /* 彩蛋弹幕从左到右动画 */
+        @keyframes scroll-right {
+            from {
+                right: 100%;
+            }
+
+            to {
+                right: -100%;
+            }
         }
     </style>
 
 </head>
 
 <body>
+    <div class="danmu-container"></div> <!-- 弹幕容器 -->
     <canvas id="pinkboard"></canvas>
     <div class="title">琦坨，生日快乐！</div>
+    <audio id="audioPlayer" loop>
+        你的浏览器不支持 audio 标签。
+    </audio>
 </body>
 
-<script src="js/index.js"></script>
+<script defer>
+    const danmuContainer = document.querySelector('.danmu-container');
+
+    // 弹幕内容
+    const messages = [
+        "生日快乐呀！🎉&nbsp;——yiqi",
+        "愿你永远开心！😊&nbsp;&nbsp;&nbsp;&nbsp;--yiqi",
+        "祝你学习顺利！📚&nbsp;&nbsp;&nbsp;&nbsp;--yiqi",
+        "每天都要美美的！💖&nbsp;&nbsp;&nbsp;&nbsp;--yiqi",
+        "新的岁月，新的幸运！🌟&nbsp;&nbsp;&nbsp;&nbsp;--yiqi"
+    ];
+    const Console_easter_egg = [
+        "占位",
+        "柒柒，愿你幸福如影随形，开心无需原因，每天笑口常开，心情愉悦~😊🌈💖",
+        "柒柒，世界虽大，有梦就不怕，祝你乘风破浪！🚀🌊✨",
+        "柒柒，愿你脚步轻盈，每一天都步步生花。🌸💃🌟"
+    ]
+    // 已经生成的弹幕数
+    let count = 1;
+    let intervalId;
+
+    // 礼花彩带的颜色数组
+    const fireworkColors = [
+        'red', 'blue', 'green', 'yellow', 'purple', 'pink', 'orange', 'cyan', 'lime', 'gold'
+    ];
+
+    // 生成随机颜色
+    function getRandomFireworkColor() {
+        return fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
+    }
+
+    // 生成随机弹幕
+    function createDanmu() {
+        //  每柒条，出现一条从左向右飘的彩蛋弹幕
+        if (count % 7 === 0) {
+            const InterestDanmu = document.createElement('div');
+            InterestDanmu.className = 'Interestdanmu';
+            InterestDanmu.innerHTML = '菜菜：柒柒，生日快乐哇！';
+            InterestDanmu.style.top = '70%';
+            InterestDanmu.style.right = '100%';
+            danmuContainer.appendChild(InterestDanmu);
+            // 监听彩蛋弹幕点击事件
+            InterestDanmu.addEventListener('click', () => {
+                InterestDanmuClick();
+            })
+            // 监听动画结束事件，移除弹幕
+            InterestDanmu.addEventListener('animationend', () => {
+                danmuContainer.removeChild(InterestDanmu);
+            });
+            console.log(Console_easter_egg[count / 7]);
+            count++;  // 更新计数
+            return;
+
+        }
+        // 如果已经生成了21条弹幕，清除定时器并在10秒后重新开始
+        if (count > 21) {
+            clearInterval(intervalId);
+            setTimeout(() => {
+                count = 1;  // 重置计数
+                intervalId = setInterval(createDanmu, 1000);  // 重新开始生成弹幕
+            }, 10000);  // 10秒后重新启动生成
+            console.log('----------------------------It is both an ending and a beginning.----------------------------');
+            return;
+        }
+        // 当计数少于21时，继续生成弹幕
+        const danmu = document.createElement('div');
+        danmu.className = 'danmu';
+        danmu.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+        danmu.style.top = `${Math.random() * 70}%`;
+        danmu.style.left = '100%';
+
+        // 设置普通弹幕的随机颜色（模拟礼花彩带效果）
+        danmu.style.color = getRandomFireworkColor();
+        danmuContainer.appendChild(danmu);
+
+        // 监听动画结束事件，移除弹幕
+        danmu.addEventListener('animationend', () => {
+            danmuContainer.removeChild(danmu);
+        });
+        console.log(count);
+        count++;  // 更新计数
+    }
+
+    // 开始生成弹幕
+    intervalId = setInterval(createDanmu, 1000);
+
+    // 彩蛋弹幕点击函数
+    function InterestDanmuClick() {
+        alert("呦呵，被你发现了这个弹幕不一般😏。点的很好，但是没什么用😜，嘿嘿 😎");
+        alert("嘿嘿嘿，别着急吐槽我，开个玩笑嘛😆😆😆")
+        // 跳转到cake.html页面
+        window.location.href = "cake.html";
+    }
+    // 自动开始播放音乐
+    fileURL = './audio/';
+    const promise = fetch("./audio/Love Story.-Taylor Swift.mp3")
+        .then(response => {
+            // 检查请求是否成功
+            if (!response.ok) {
+                throw new Error('网络请求失败');
+            }
+            // 获取音频的 Blob 数据
+            return response.blob();
+        })
+        .then(blob => {
+            // 使用Blob创建URL
+            const audioURL = URL.createObjectURL(blob);
+
+            // 获取audio元素并设置src
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = audioURL;
+
+            // 播放音频
+            audioPlayer.play().catch(error => {
+                console.log('播放失败:', error);
+            });
+        })
+        .catch(error => {
+            console.log('发生错误:', error);
+        });
+</script>
+
+<script src="js/index.js" defer></script>
 
 </html>

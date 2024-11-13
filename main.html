@@ -5,12 +5,12 @@
     <meta charset="UTF-8" />
     <title>琦坨，生日快乐</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="shortcut icon" href="imgs/heart.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/heart.png" type="image/x-icon">
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="theme-color" content="#000000" />
     <meta name="msapplication-TileColor" content="#000000" />
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="./js/typed.js"></script>
     <link rel="stylesheet" href="css/style.css" />
 </head>
 
@@ -142,18 +142,12 @@
         <!-- -------- -->
     </div>
 
-    <!-- 占位 -->
+
     <div class="birthday-content">
-        <!-- <h2>高思琦，生日快乐呀！</h2>
-        <p>愿你的每一步都踏在幸福的节拍上，</p>
-        <p>愿你的每一个梦想都像星辰一样璀璨.</p>
-        <p>愿你的生活如同这美妙的烟花，绚丽多彩，</p>
-        <p>愿你的岁岁年年，都如同今日这般美好。</p>
-        <p>再次祝福你，生日快乐！</p> -->
         <div class="birthday-text">
             <span id="element"></span>
         </div>
-        <div class="birthday-cake"><img id="cakeGif" src="./imgs/katongCAKE.gif" alt="生日蛋糕"></div>
+        <div class="birthday-cake"><img id="cakeGif" src="./images/katongCAKE.gif" alt="生日蛋糕"></div>
     </div>
 
     <div class="index-bg">
@@ -200,6 +194,7 @@
     <script src="./js/MyMath.js"></script>
     <script src="./js/script.js"></script>
     <script>
+        console.log('哎哟不错嘛，琦坨，这个隐藏页面都被你发现了');
         var typed = new Typed('#element', {
             strings: ['<span>在这个特别的日子里，愿你如繁星般闪耀 ✨，像春风一样温暖 🌸，生活的每一天都充满快乐和幸福 😊。</span><br> <span>你不仅是一个充满智慧和勇气的女孩 💪，更是一个拥有美好心灵的人 💖，愿你的未来更加灿烂光辉 🌟。</span><br> <span>希望你所有的梦想都能成真 🌈，未来的每一步都走得坚定而自信 🚶‍♀️。</span><br> <span>希望我们一起迎接更多美好的时光 🕰️！</span>',
                 '<h2>亲爱的高思琦，生日快乐呀！🎉</h2><span>愿你的每一步都踏在幸福的节拍上，💃</span><br><span>愿你的每一个梦想都像星辰一样璀璨。🌟</span><br><span>愿你的生活如同这美妙的烟花，绚丽多彩，🎆</span><br><span>愿你的岁岁年年，都如同今日这般美好。🌸</span><br><span>再次祝福你，生日快乐！🎂</span>'
@@ -210,7 +205,7 @@
         const cakeImg = document.getElementById('cakeGif');
         setTimeout(function () {
             // 切换到最后一帧的静态图片
-            cakeImg.src = './imgs/katongCAKE_end.png'; // 最后一帧静态图片
+            cakeImg.src = './images/katongCAKE_end.png'; // 最后一帧静态图片
         }, 2600 * 9);
 
         // 爱心点击
