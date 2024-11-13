@@ -5,6 +5,7 @@
     <title>高思琦，生日快乐呀！</title>
     <meta charset="utf-8">
     <link rel="shortcut icon" href="images/heart.png" type="image/x-icon">
+    <script src="./js/jquery.js"></script>
     <style>
         html,
         body {
@@ -107,6 +108,21 @@
                 right: -100%;
             }
         }
+
+        #playMusic {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+            font-size: 1.5em;
+            font-family: "Microsoft YaHei", "黑体", "宋体", sans-serif;
+            color: deeppink;
+            background-color: #ccc;
+            width: 150px;
+            height: 60px;
+            padding: 5px;
+        }
     </style>
 
 </head>
@@ -115,9 +131,8 @@
     <div class="danmu-container"></div> <!-- 弹幕容器 -->
     <canvas id="pinkboard"></canvas>
     <div class="title">琦坨，生日快乐！</div>
-    <audio id="audioPlayer" loop>
-        你的浏览器不支持 audio 标签。
-    </audio>
+    <audio id="audioPlayer" src="./audio/Love Story.-Taylor Swift.mp3" preload="auto" loop></audio>
+    <button id="playMusic">播放音乐</button>>
 </body>
 
 <script defer>
@@ -132,7 +147,7 @@
         "新的岁月，新的幸运！🌟&nbsp;&nbsp;&nbsp;&nbsp;--yiqi"
     ];
     const Console_easter_egg = [
-        "占位",
+        "",
         "柒柒，愿你幸福如影随形，开心无需原因，每天笑口常开，心情愉悦~😊🌈💖",
         "柒柒，世界虽大，有梦就不怕，祝你乘风破浪！🚀🌊✨",
         "柒柒，愿你脚步轻盈，每一天都步步生花。🌸💃🌟"
@@ -157,7 +172,7 @@
         if (count % 7 === 0) {
             const InterestDanmu = document.createElement('div');
             InterestDanmu.className = 'Interestdanmu';
-            InterestDanmu.innerHTML = '菜菜：柒柒，生日快乐哇！';
+            InterestDanmu.innerHTML = '菜菜:柒柒，生日快乐哇！';
             InterestDanmu.style.top = '70%';
             InterestDanmu.style.right = '100%';
             danmuContainer.appendChild(InterestDanmu);
@@ -213,33 +228,13 @@
         // 跳转到cake.html页面
         window.location.href = "cake.html";
     }
-    // 自动开始播放音乐
-    fileURL = './audio/';
-    const promise = fetch("./audio/Love Story.-Taylor Swift.mp3")
-        .then(response => {
-            // 检查请求是否成功
-            if (!response.ok) {
-                throw new Error('网络请求失败');
-            }
-            // 获取音频的 Blob 数据
-            return response.blob();
-        })
-        .then(blob => {
-            // 使用Blob创建URL
-            const audioURL = URL.createObjectURL(blob);
-
-            // 获取audio元素并设置src
-            const audioPlayer = document.getElementById('audioPlayer');
-            audioPlayer.src = audioURL;
-
-            // 播放音频
-            audioPlayer.play().catch(error => {
-                console.log('播放失败:', error);
-            });
-        })
-        .catch(error => {
-            console.log('发生错误:', error);
-        });
+    // 点击按钮播放音乐
+    let music = document.getElementById("audioPlayer");
+    let bottom = document.getElementById("playMusic");
+    bottom.addEventListener("click", () => {
+        music.play()
+        $("#playMusic").fadeOut(500);
+    })
 </script>
 
 <script src="js/index.js" defer></script>
