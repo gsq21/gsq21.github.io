@@ -431,7 +431,7 @@ function renderApp(state) {
 	appNodes.controls.classList.toggle("hide", state.menuOpen || state.config.hideControls);
 	appNodes.canvasContainer.classList.toggle("blur", state.menuOpen);
 	appNodes.menu.classList.toggle("hide", !state.menuOpen);
-	appNodes.birthday_content.classList.toggle("hide", state.menuOpen);
+	appNodes.birthday_content.classList.toggle("hide", state.menuOpen);//祝福文字显示与否依据控制面板是否打开
 	appNodes.finaleModeFormOption.style.opacity = state.config.autoLaunch ? 1 : 0.32;
 
 	appNodes.quality.value = state.config.quality;

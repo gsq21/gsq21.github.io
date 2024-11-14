@@ -130,8 +130,8 @@
 <body>
     <div class="danmu-container"></div> <!-- 弹幕容器 -->
     <canvas id="pinkboard"></canvas>
-    <div class="title">琦坨，生日快乐！</div>
-    <audio id="audioPlayer" src="./audio/Love Story.-Taylor Swift.mp3" preload="auto"></audio>
+    <div class="title">生日快乐！</div>
+    <audio id="audioPlayer" src="./audio/Love Story.-Taylor Swift.mp3" preload="auto" autoplay></audio>
     <button id="playMusic">播放音乐</button>>
 </body>
 
@@ -140,11 +140,15 @@
 
     // 弹幕内容
     const messages = [
-        "生日快乐呀！🎉&nbsp;——yiqi",
-        "愿你永远开心！😊&nbsp;&nbsp;&nbsp;&nbsp;--yiqi",
-        "祝你学习顺利！📚&nbsp;&nbsp;&nbsp;&nbsp;--yiqi",
-        "每天都要美美的！💖&nbsp;&nbsp;&nbsp;&nbsp;--yiqi",
-        "新的岁月，新的幸运！🌟&nbsp;&nbsp;&nbsp;&nbsp;--yiqi"
+        "生日快乐呀！🎉",
+        "愿你永远开心！😊",
+        "祝你学习顺利！📚",
+        "每天都要美美的！💖",
+        "新的岁月，新的幸运！🌟",
+        "岁月如歌，愿你青春常驻，笑颜常开，生日快乐！💫",
+        "愿你的每个愿望都能成真，生日快乐！✨",
+        "愿你每一岁都充满欢笑，每一刻都闪烁光芒！🌈",
+        "愿你一生平安，万事如意！🌟",
     ];
     const Console_easter_egg = [
         "",
@@ -172,7 +176,7 @@
         if (count % 7 === 0) {
             const InterestDanmu = document.createElement('div');
             InterestDanmu.className = 'Interestdanmu';
-            InterestDanmu.innerHTML = '菜菜:柒柒，生日快乐哇！';
+            InterestDanmu.innerHTML = '琦坨，生日快乐哇！';
             InterestDanmu.style.top = '70%';
             InterestDanmu.style.right = '100%';
             danmuContainer.appendChild(InterestDanmu);

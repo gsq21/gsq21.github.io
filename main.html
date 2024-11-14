@@ -125,6 +125,18 @@
                             <label class="long-exposure-label"> 保留烟花的火花 </label>
                             <input class="long-exposure" type="checkbox" />
                         </div>
+                        <div class="form-option form-option--select">
+                            <label class="long-exposure-label"> 切换背景音乐 </label>
+                            <select id="songSelect">
+                                <option value="none" selected disabled hidden>送你一颗流星</option>
+                                <option value="送你一颗流星.mp3">送你一颗流星</option>
+                                <option value="流沙-陶喆.mp3">流沙-陶喆</option>
+                                <option value="落笔成书-单依纯.mp3">落笔成书-单依纯</option>
+                                <option value="Mr.Chu(On Stage).mp3">Mr.Chu(On Stage)</option>
+                                <option value="Love Story.-Taylor Swift.mp3">Love Story.-Taylor Swift</option>
+                                <option value="happyBirthday.mp3">生日快乐（卓依婷）</option>
+                            </select>
+                        </div>
                     </form>
                     <div class="credits">
                     </div>
@@ -141,7 +153,10 @@
         </div>
         <!-- -------- -->
     </div>
-
+    <audio id="audioPlayer">
+        <source src="./audio/送你一颗流星.mp3" type="audio/mp3">
+        您的浏览器不支持音频元素。
+    </audio>
 
     <div class="birthday-content">
         <div class="birthday-text">
@@ -279,6 +294,33 @@
                 star.style.display = 'none';
             }
         });
+
+        // 背景音乐
+        // 获取音频播放器
+        const audioPlayer = document.getElementById('audioPlayer');
+        audioPlayer.loop = true;
+        audioPlayer.play();
+        document.getElementById('songSelect').addEventListener('change', function () {
+            // 获取选中的歌曲路径
+            const selectedSong = "./audio/" + this.value;
+
+            // 更新音频源
+            audioPlayer.src = selectedSong;
+
+            // 播放新选择的歌曲
+            audioPlayer.play();
+        });
+
+        // 暂停音乐
+        const pauseBtn = document.querySelector('.sound-btn');
+        const use = document.querySelector('.sound-btn use');
+        pauseBtn.addEventListener('click', function () {
+            if (use.href.animVal === "#icon-sound-on") {
+                audioPlayer.play();
+            } else {
+                audioPlayer.pause();
+            }
+        })
     </script>
 
 </body>
