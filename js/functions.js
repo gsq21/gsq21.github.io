@@ -18,7 +18,7 @@ $(function () {
 
 	$("#content").css("width", $loveHeart.width() + $("#code").width());
 	$("#content").css("height", Math.max($loveHeart.height(), $("#code").height()));
-	$("#content").css("margin-top", Math.max(($window.height() - $("#content").height()) / 4, 10));
+	$("#content").css("margin-top", Math.max(($window.height() - $("#content").height()) / 3, 10));
 	$("#content").css("margin-left", Math.max(($window.width() - $("#content").width()) / 2, 10));
 
 	// renderLoop

@@ -73,9 +73,10 @@
     <div class="birthday-content">
         <span id="element"></span>
     </div>
-    <audio src="./audio/happyBirthday.mp3" autoplay loop></audio>
+    <!-- <audio id="audio" src="./audio/happyBirthday.mp3" autoplay loop></audio> -->
 </body>
 <script type="text/javascript">
+    // 蛋糕动画
     var offsetX = $("#loveHeart").width() / 2;
     var offsetY = $("#loveHeart").height() / 2 - 55;
     var together = new Date();
@@ -124,6 +125,88 @@
             typeSpeed: 60,
         });
     }, 500);
+    // 自动播放音乐
+    // 音乐管理器
+    const musicManager = {
+        baseURL: "./audio/",  // 音频文件的路径
+        ctx: new (window.AudioContext || window.webkitAudioContext)(),  // 创建AudioContext
+        audioSource: null,  // 用于播放的音频源
+        audioBuffer: null,  // 存储音频数据
+
+        // 预加载音频文件
+        preload(fileName) {
+            const fileURL = this.baseURL + fileName;
+
+            return fetch(fileURL)
+                .then(this.checkStatus)
+                .then((response) => response.arrayBuffer())
+                .then((data) => this.ctx.decodeAudioData(data))
+                .then((buffer) => {
+                    this.audioBuffer = buffer;
+                });
+        },
+
+        // 检查网络请求的状态
+        checkStatus(response) {
+            if (response.status >= 200 && response.status < 300) {
+                return response;
+            }
+            const customError = new Error(response.statusText);
+            customError.response = response;
+            throw customError;
+        },
+
+        // 播放音频
+        play() {
+            // 确保音频上下文已恢复
+            this.ctx.resume().then(() => {
+                if (!this.audioBuffer) {
+                    console.error('Audio not loaded yet!');
+                    return;
+                }
+
+                // 创建一个音频源节点
+                const source = this.ctx.createBufferSource();
+                source.buffer = this.audioBuffer;
+
+                // 创建增益节点来控制音量
+                const gainNode = this.ctx.createGain();
+                gainNode.gain.value = 1;  // 音量设置为 1
+
+                // 连接音频源节点和增益节点
+                source.connect(gainNode);
+                gainNode.connect(this.ctx.destination);
+
+                // 设置音频循环播放
+                source.loop = true;
+
+                // 播放音频
+                source.start(0);
+
+                // 存储音频源以便后续操作（例如停止播放）
+                this.audioSource = source;
+            });
+        },
+
+        // 停止播放音频
+        stop() {
+            if (this.audioSource) {
+                this.audioSource.stop();
+                this.audioSource = null;
+            }
+        }
+    };
+
+    // 预加载并自动播放音频
+    document.addEventListener("DOMContentLoaded", function () {
+        musicManager.preload("happyBirthday.mp3")
+            .then(() => {
+                musicManager.play();  // 自动播放并循环
+            })
+            .catch((error) => {
+                console.error("Error loading audio:", error);
+            });
+    });
 </script>
 <style>
 

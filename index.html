@@ -131,7 +131,7 @@
     <div class="danmu-container"></div> <!-- 弹幕容器 -->
     <canvas id="pinkboard"></canvas>
     <div class="title">琦坨，生日快乐！</div>
-    <audio id="audioPlayer" src="./audio/Love Story.-Taylor Swift.mp3" preload="auto" loop></audio>
+    <audio id="audioPlayer" src="./audio/Love Story.-Taylor Swift.mp3" preload="auto"></audio>
     <button id="playMusic">播放音乐</button>>
 </body>
 
@@ -233,6 +233,7 @@
     let bottom = document.getElementById("playMusic");
     bottom.addEventListener("click", () => {
         music.play()
+        music.loop = true;
         $("#playMusic").fadeOut(500);
     })
 </script>
