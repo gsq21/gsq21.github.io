@@ -296,11 +296,92 @@
         });
 
         // 背景音乐
+        // 自动播放歌曲（为了适应lj夸克）
+        // 音乐管理器
+        const musicManager_ = {
+            baseURL: "./audio/",  // 音频文件的路径
+            ctx: new (window.AudioContext || window.webkitAudioContext)(),  // 创建AudioContext
+            audioSource: null,  // 用于播放的音频源
+            audioBuffer: null,  // 存储音频数据
+
+            // 预加载音频文件
+            preload_(fileName) {
+                const fileURL = this.baseURL + fileName;
+
+                return fetch(fileURL)
+                    .then(this.checkStatus_)
+                    .then((response) => response.arrayBuffer())
+                    .then((data) => this.ctx.decodeAudioData(data))
+                    .then((buffer) => {
+                        this.audioBuffer = buffer;
+                    });
+            },
+
+            // 检查网络请求的状态
+            checkStatus_(response) {
+                if (response.status >= 200 && response.status < 300) {
+                    return response;
+                }
+                const customError = new Error(response.statusText);
+                customError.response = response;
+                throw customError;
+            },
+
+            // 播放音频
+            play_() {
+                // 确保音频上下文已恢复
+                this.ctx.resume().then(() => {
+                    if (!this.audioBuffer) {
+                        // console.error('Audio not loaded yet!');
+                        return;
+                    }
+
+                    // 创建一个音频源节点
+                    const source = this.ctx.createBufferSource();
+                    source.buffer = this.audioBuffer;
+
+                    // 创建增益节点来控制音量
+                    const gainNode = this.ctx.createGain();
+                    gainNode.gain.value = 1;  // 音量设置为 1
+
+                    // 连接音频源节点和增益节点
+                    source.connect(gainNode);
+                    gainNode.connect(this.ctx.destination);
+
+                    // 设置音频循环播放
+                    source.autoplay = true;
+
+                    // 播放音频
+                    source.start(0);
+
+                    // 存储音频源以便后续操作（例如停止播放）
+                    this.audioSource = source;
+                });
+            },
+
+            // 停止播放音频
+            stop_() {
+                if (this.audioSource) {
+                    this.audioSource.stop();
+                    this.audioSource = null;
+                }
+            }
+        };
+        document.addEventListener("DOMContentLoaded", function () {
+            musicManager.preload_("送你一颗流星.mp3")
+                .then(() => {
+                    musicManager_.play_();  // 自动播放并循环
+                })
+                .catch((error) => {
+                    // console.error("Error loading audio:", error);
+                });
+        });
+
         // 获取音频播放器
         const audioPlayer = document.getElementById('audioPlayer');
         audioPlayer.loop = true;
-        audioPlayer.play();
         document.getElementById('songSelect').addEventListener('change', function () {
+            musicManager_.stop_();
             // 获取选中的歌曲路径
             const selectedSong = "./audio/" + this.value;
 
@@ -310,11 +391,11 @@
             // 播放新选择的歌曲
             audioPlayer.play();
         });
-
         // 暂停音乐
         const pauseBtn = document.querySelector('.sound-btn');
         const use = document.querySelector('.sound-btn use');
         pauseBtn.addEventListener('click', function () {
+            musicManager_.stop_();
             if (use.href.animVal === "#icon-sound-on") {
                 audioPlayer.play();
             } else {
