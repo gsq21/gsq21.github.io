@@ -1,4 +1,3 @@
-A birthday wishes page for my friend
 ---
 #### Reference warehouse
 1. [Firework_Simulator](https://github.com/NianBroken/Firework_Simulator.git)
